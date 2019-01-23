@@ -1,3 +1,4 @@
+
 package endpoint;
 
 import java.util.List;
@@ -19,19 +20,33 @@ import com.google.gson.Gson;
 import dto.PlayerDto;
 import service.IPlayerService;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class PlayerEndpoint.
+ */
 @ApplicationScoped
 @Path("/players")
 public class PlayerEndpoint {
 	
+	/** The player service. */
 	@Inject	
 	private IPlayerService playerService;	
 	
+	/** The gson. */
 	private Gson gson;
 	
+	/**
+	 * Instantiates a new player endpoint.
+	 */
 	public PlayerEndpoint() {
 		gson = new Gson();
 	}	
 	
+	/**
+	 * Gets the list.
+	 *
+	 * @return the list
+	 */
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public String getList() {
@@ -41,6 +56,12 @@ public class PlayerEndpoint {
 		return toJson(players);
 	}
 	
+	/**
+	 * Gets the player by name.
+	 *
+	 * @param name the name
+	 * @return the player by name
+	 */
 	@GET
 	@Path("byName/{name}")
 	@Produces(MediaType.TEXT_PLAIN)
@@ -54,6 +75,12 @@ public class PlayerEndpoint {
 							;
 	}
 	
+	/**
+	 * Alive.
+	 *
+	 * @param id the id
+	 * @return the string
+	 */
 	@GET
 	@Path("alive/{id}")
 	@Produces(MediaType.TEXT_PLAIN)
@@ -63,6 +90,12 @@ public class PlayerEndpoint {
 		return "OK";					
 	}
 	
+	/**
+	 * Gets the player by id.
+	 *
+	 * @param id the id
+	 * @return the player by id
+	 */
 	@GET
 	@Path("byId/{id}")
 	@Produces(MediaType.TEXT_PLAIN)
@@ -76,6 +109,12 @@ public class PlayerEndpoint {
 							;
 	}
 	
+	/**
+	 * Creates the player.
+	 *
+	 * @param userName the user name
+	 * @return the response
+	 */
 	@POST
 	@Path("{userName}")
 	@Produces(MediaType.TEXT_PLAIN)
@@ -88,6 +127,12 @@ public class PlayerEndpoint {
 							.orElse( Response.status(Response.Status.CONFLICT).entity("USER EXIST!" ).build() );
 	}	
 	
+	/**
+	 * Removes the player.
+	 *
+	 * @param id the id
+	 * @return the response
+	 */
 	@DELETE
 	@Path("{id}")
 	@Produces(MediaType.TEXT_PLAIN)
@@ -101,6 +146,12 @@ public class PlayerEndpoint {
 	}	
 		
 	
+	/**
+	 * To json.
+	 *
+	 * @param o the o
+	 * @return the string
+	 */
 	private String toJson(Object o) {
 		return gson.toJson(o);
 	}

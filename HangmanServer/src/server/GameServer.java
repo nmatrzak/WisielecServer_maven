@@ -1,3 +1,4 @@
+
 package server;
 
 import java.time.LocalDateTime;
@@ -17,32 +18,38 @@ import game.Player;
 import game.PlayerStatus;
 import utils.WordCodeDecode;
 
+// TODO: Auto-generated Javadoc
 /**
- * Klasa do obs³ugi listy gier
- * 
+ * Klasa do obsï¿½ugi listy gier.
+ *
  * @author Norbert Matrzak
- * 
  */
 @ApplicationScoped
 public class GameServer implements IGameServer {
 
+	/** The players. */
 	private List<Player> players = new ArrayList<>();
+	
+	/** The random. */
 	private Random random = new Random();
 
+	/** The Constant MINUTES_WITHOUT_ACTIVITY_TO_REMOVE_GAME. */
 	private final static long MINUTES_WITHOUT_ACTIVITY_TO_REMOVE_GAME = 10;
 
+	/** The server. */
 	@Inject
 	private IAppServer server;
 
+	/** The games. */
 	private ConcurrentLinkedQueue<Game> games = new ConcurrentLinkedQueue<>();
 
 	/**
-	 * Tworzy grê dla pary graczy 
-	 * @author Norbert Matrzak 
-	 * @param player - gracz 
-	 * @param opponent - przeciwnik 
-	 * @return Game - gra 
-	 * @exception
+	 * Tworzy grï¿½ dla pary graczy .
+	 *
+	 * @author Norbert Matrzak
+	 * @param player - gracz
+	 * @param opponent - przeciwnik
+	 * @return Game - gra
 	 */
 	public Game createGame(Player player, Player opponent) {
 		System.out.print("GameServer.createGame: ");
@@ -51,11 +58,11 @@ public class GameServer implements IGameServer {
 	}
 
 	/**
-	 * Tworzy grê dla gracz z przypisaniem wirtualnego gracza (komputer) 
-	 * @author Norbert Matrzak 
-	 * @param player - gracz 
-	 * @return Game - gra 
-	 * @exception
+	 * Tworzy grï¿½ dla gracz z przypisaniem wirtualnego gracza (komputer) .
+	 *
+	 * @author Norbert Matrzak
+	 * @param player - gracz
+	 * @return Game - gra
 	 */
 	public Game createGame(Player player) {
 		System.out.print("GameServer.createGame");
@@ -64,13 +71,13 @@ public class GameServer implements IGameServer {
 	}
 
 	/**
-	 * Tworzy grê dla pary graczy 
-	 * @author Norbert Matrzak 
-	 * @param player - gracz 
-	 * @param opponent - przeciwnik 
-	 * @param randomRole - czy ma byæ losowana rola zgaduj¹cy/wprowadza¹cy s³owo 
-	 * @return Game - gra 
-	 * @exception
+	 * Tworzy grï¿½ dla pary graczy .
+	 *
+	 * @author Norbert Matrzak
+	 * @param player - gracz
+	 * @param opponent - przeciwnik
+	 * @param randomRole - czy ma byï¿½ losowana rola zgadujï¿½cy/wprowadzaï¿½cy sï¿½owo
+	 * @return Game - gra
 	 */
 	private Game makeGame(Player player, Player opponent, boolean randomRole) {
 		System.out.print("GameServer.makeGame: ");
@@ -98,9 +105,10 @@ public class GameServer implements IGameServer {
 	}
 
 	/**
-	 * Dodaje gracza i wysy³a komunikat odœwie¿ listê graczy   
-	 * @author Norbert Matrzak 
-	 * @param player - gracz 
+	 * Dodaje gracza i wysyï¿½a komunikat odï¿½wieï¿½ listï¿½ graczy   .
+	 *
+	 * @author Norbert Matrzak
+	 * @param player - gracz
 	 */
 	public void addPlayer(Player player) {
 		System.out.print("GameServer.createPlayer " + player.getName());
@@ -109,10 +117,10 @@ public class GameServer implements IGameServer {
 	}
 
 	/**
-	 * Usuwa gracza i wysy³a komunikat odœwie¿ listê graczy  
-	 * @author Norbert Matrzak 
+	 * Usuwa gracza i wysyï¿½a komunikat odï¿½wieï¿½ listï¿½ graczy  .
+	 *
+	 * @author Norbert Matrzak
 	 * @param player - gracz
-	 * 
 	 */
 	public void removePlayer(Player player) {
 		System.out.print("GameServer.removePlayer " + player.getName());
@@ -122,9 +130,10 @@ public class GameServer implements IGameServer {
 	}
 
 	/**
-	 * Realizuje akcjê roz³¹czenia-zakoñczenia gry 
-	 * @author Norbert Matrzak 
-	 * @param player - gracz 
+	 * Realizuje akcjï¿½ rozï¿½ï¿½czenia-zakoï¿½czenia gry .
+	 *
+	 * @author Norbert Matrzak
+	 * @param player - gracz
 	 * @return @exception
 	 */
 	public void playerDisconnected(Player player) {
@@ -138,11 +147,11 @@ public class GameServer implements IGameServer {
 	}
 
 	/**
-	 * Znajduje grê dla danego gracza 
-	 * @author Norbert Matrzak 
-	 * @param player - gracz (obiekt klasy Player) 
-	 * @return znaleziony obiekt klasy Game 
-	 * @exception
+	 * Znajduje grï¿½ dla danego gracza .
+	 *
+	 * @author Norbert Matrzak
+	 * @param player - gracz (obiekt klasy Player)
+	 * @return znaleziony obiekt klasy Game
 	 */
 	public Game findGameByPlayer(Player player) {
 		System.out.print("GameServer.findGameByPlayer - in: " + player);
@@ -157,11 +166,11 @@ public class GameServer implements IGameServer {
 	}
 
 	/**
-	 * Wyszukuje gracza o podanej nazwie 
-	 * @author Norbert Matrzak 
-	 * @param playerName - nazwa gracza 
-	 * @return znaleziony obiekt klasy Player 
-	 * @exception
+	 * Wyszukuje gracza o podanej nazwie .
+	 *
+	 * @author Norbert Matrzak
+	 * @param playerName - nazwa gracza
+	 * @return znaleziony obiekt klasy Player
 	 */
 	public Player findPlayerByName(String playerName) {
 		System.out.print("GameServer.findPlayerByName: " + playerName);
@@ -174,11 +183,11 @@ public class GameServer implements IGameServer {
 	}
 
 	/**
-	 * Wyszukuje gracza o podanym id 
-	 * @author Norbert Matrzak 
-	 * @param id - id gracza 
-	 * @return znaleziony obiekt klasy Player 
-	 * @exception
+	 * Wyszukuje gracza o podanym id .
+	 *
+	 * @author Norbert Matrzak
+	 * @param id - id gracza
+	 * @return znaleziony obiekt klasy Player
 	 */
 	public Player findPlayerById(long id) {
 		System.out.print("GameServer.findPlayerById: " + id);
@@ -191,9 +200,9 @@ public class GameServer implements IGameServer {
 	}
 
 	/**
-	 * Oddœwie¿a listê gier, i wysy³a sygna³ do klienta (przegl¹darki) - wymuszenie oddœwie¿enia listy graczy 
+	 * Oddï¿½wieï¿½a listï¿½ gier, i wysyï¿½a sygnaï¿½ do klienta (przeglï¿½darki) - wymuszenie oddï¿½wieï¿½enia listy graczy .
+	 *
 	 * @author Norbert Matrzak
-	 * 
 	 */
 	private void listPlayers() {
 		System.out.print("GameServer.listPlayers");
@@ -204,12 +213,11 @@ public class GameServer implements IGameServer {
 	}
 
 	/**
-	 * Zwraca listê graczy, na potrzeby javascript, zawsze dodawani s¹ dwaj
-	 * gracze niewidoczni, tak aby JavaScrit zawsza widzia³ obiekt jako listê obiektów gracz 
-	 * @author Norbert Matrzak 
-	 * @param 
-	 * @return lista graczy 
-	 * @exception
+	 * Zwraca listï¿½ graczy, na potrzeby javascript, zawsze dodawani sï¿½ dwaj
+	 * gracze niewidoczni, tak aby JavaScrit zawsza widziaï¿½ obiekt jako listï¿½ obiektï¿½w gracz .
+	 *
+	 * @author Norbert Matrzak
+	 * @return lista graczy
 	 */
 	public List<Player> getPlayers() {
 		System.out.print("GameServer.getPlayers");
@@ -220,10 +228,11 @@ public class GameServer implements IGameServer {
 	}
 
 	/**
-	 * Tworzy i zwraca nie widocznego gracza 
-	 * @author Norbert Matrzak 
-	 * @param playerName - nazwa gracza 
-	 * @return gracz 
+	 * Tworzy i zwraca nie widocznego gracza .
+	 *
+	 * @author Norbert Matrzak
+	 * @param playerName - nazwa gracza
+	 * @return gracz
 	 */
 	private Player createInvisiblePlayer(String playerName) {
 //		System.out.print("GameServer.createInvisiblePlayer: " + playerName);
@@ -233,11 +242,12 @@ public class GameServer implements IGameServer {
 	}
 
 	/**
-	 * Aktualizuje wybrakowane - szukane s³owo o podan¹ / wysy³a literê 
-	 * @author Norbert Matrzak 
-	 * @param player - gracz 
-	 * @param letter - wys³ana litera (mo¿e byæ zakodowana w przypadku polskich diaktrycznych liter) 
-	 * @return gra - przypisana do gracza 
+	 * Aktualizuje wybrakowane - szukane sï¿½owo o podanï¿½ / wysyï¿½a literï¿½ .
+	 *
+	 * @author Norbert Matrzak
+	 * @param player - gracz
+	 * @param letter - wysï¿½ana litera (moï¿½e byï¿½ zakodowana w przypadku polskich diaktrycznych liter)
+	 * @return gra - przypisana do gracza
 	 */
 	public Game updateGappedWordLetter(Player player, String letter) {
 		Game game = findGameByPlayer(player);
@@ -251,22 +261,23 @@ public class GameServer implements IGameServer {
 	}
 
 	/**
-	 * Wyszukuje zapisana gre dla gracza o podanej nazwie 
-	 * @author Norbert Matrzak 
-	 * @param playerName - nazwa gracza 
-	 * @return znaleziony obiekt klasy Game 
-	 * @exception
+	 * Wyszukuje zapisana gre dla gracza o podanej nazwie .
+	 *
+	 * @author Norbert Matrzak
+	 * @param playerName - nazwa gracza
+	 * @return znaleziony obiekt klasy Game
 	 */
 	public Game getGameByPlayerName(String playerName) {
 		return findGameByPlayer(findPlayerByName(playerName));
 	}
 
 	/**
-	 * Aktualizuje s³owo do zgadniêcia 
-	 * @author Norbert Matrzak 
-	 * @param player - gracz 
-	 * @param letter - wys³ana litera (mo¿e byæ zakodowana w przypadku polskich diaktrycznych liter) 
-	 * @return gra - przypisana do gracza 
+	 * Aktualizuje sï¿½owo do zgadniï¿½cia .
+	 *
+	 * @author Norbert Matrzak
+	 * @param player - gracz
+	 * @param word the word
+	 * @return gra - przypisana do gracza
 	 */
 	public Game updateWord(Player player, String word) {
 		Game game = findGameByPlayer(player);
@@ -279,10 +290,11 @@ public class GameServer implements IGameServer {
 	}
 
 	/**
-	 * Koñczy grê dla danego gracza i wykonuje dodatkowe czynnoœci - komunikat
-	 * o zakoñczeniu gry 
-	 * @author Norbert Matrzak 
-	 * @param player - gracz 
+	 * Koï¿½czy grï¿½ dla danego gracza i wykonuje dodatkowe czynnoï¿½ci - komunikat
+	 * o zakoï¿½czeniu gry .
+	 *
+	 * @author Norbert Matrzak
+	 * @param player - gracz
 	 */
 	public void playerEndGame(Player player) {
 		player.endGame();
@@ -292,9 +304,10 @@ public class GameServer implements IGameServer {
 	}
 
 	/**
-	 * Koñczy grê i wykonuje dodatkowe czynnoœci - np. wys³anie komunikatów 
-	 * @author Norbert Matrzak 
-	 * @param player - gracz
+	 * Koï¿½czy grï¿½ i wykonuje dodatkowe czynnoï¿½ci - np. wysï¿½anie komunikatï¿½w 
+	 *
+	 * @author Norbert Matrzak
+	 * @param game the game
 	 */
 	public void removeGame(Game game) {
 		playerEndGame(game.getGuessPlayer());
@@ -303,10 +316,10 @@ public class GameServer implements IGameServer {
 	}
 
 	/**
-	 * Usuwa grê 
-	 * @author Norbert Matrzak 
-	 * @param player -gracz 
-	 * 
+	 * Usuwa grï¿½ .
+	 *
+	 * @author Norbert Matrzak
+	 * @param player -gracz
 	 */
 	private void removeGame(Player player) {
 		Game game = findGameByPlayer(player);
@@ -316,9 +329,10 @@ public class GameServer implements IGameServer {
 	}
 
 	/**
-	 * Aktualizuje listê gier i zwraca j¹ 
-	 * @author Norbert Matrzak 
-	 * @return - lista gier 
+	 * Aktualizuje listï¿½ gier i zwraca jï¿½ .
+	 *
+	 * @author Norbert Matrzak
+	 * @return - lista gier
 	 */
 	public List<Game> getListOfGames() {
 		refreshGames();
@@ -326,9 +340,9 @@ public class GameServer implements IGameServer {
 	}
 
 	/**
-	 * Aktualizuje listê gier - usuwa gry o czasie bezczynnoœci d³u¿szym ni¿ X sekund 
-	 * @author Norbert Matrzak 
-	 * 
+	 * Aktualizuje listï¿½ gier - usuwa gry o czasie bezczynnoï¿½ci dï¿½uï¿½szym niï¿½ X sekund .
+	 *
+	 * @author Norbert Matrzak
 	 */
 	private void refreshGames() {
 		try {
@@ -342,11 +356,11 @@ public class GameServer implements IGameServer {
 	}
 
 	/**
-	 * Sprawdza stan bezczynnoœci gry 
+	 * Sprawdza stan bezczynnoï¿½ci gry .
+	 *
 	 * @author Norbert Matrzak
 	 * @param game - badana gra
-	 * @return true-je¿eli zosta³ przekroczony stan bezczynnoœci 
-	 * @exception
+	 * @return true-jeï¿½eli zostaï¿½ przekroczony stan bezczynnoï¿½ci
 	 */
 	private boolean noActivityForLongTime(Game game) {
 		return (LocalDateTime.now().minusMinutes(MINUTES_WITHOUT_ACTIVITY_TO_REMOVE_GAME)

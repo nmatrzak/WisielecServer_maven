@@ -1,3 +1,4 @@
+
 package endpoint;
 
 import java.util.Optional;
@@ -18,21 +19,37 @@ import game.Game;
 import server.IGameServer;
 import service.IPlayerService;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class GameEndpoint.
+ */
 @ApplicationScoped
 @Path("/game")
 public class GameEndpoint {
 	
+	/** The player service. */
 	@Inject	
 	private IPlayerService playerService;
 	
+	/** The game server. */
 	@Inject
 	private IGameServer gameServer;
+	
+	/** The gson. */
 	private Gson gson;
 	
+	/**
+	 * Instantiates a new game endpoint.
+	 */
 	public GameEndpoint() {
 		gson = new Gson();
 	}	
 	
+	/**
+	 * Gets the list.
+	 *
+	 * @return the list
+	 */
 	@GET	
 	@Produces(MediaType.TEXT_PLAIN)
 	public String getList() {						
@@ -40,6 +57,13 @@ public class GameEndpoint {
 		return toJson(gameServer.getListOfGames());
 	}	
 	
+	/**
+	 * Createt game.
+	 *
+	 * @param playerId the player id
+	 * @param opponentId the opponent id
+	 * @return the string
+	 */
 	@GET
 	@Path("{playerId}/{opponentId}")
 	@Produces(MediaType.TEXT_PLAIN)
@@ -52,6 +76,12 @@ public class GameEndpoint {
 		return "word";
 	}	
 	
+	/**
+	 * Gets the game.
+	 *
+	 * @param playerId the player id
+	 * @return the game
+	 */
 	@GET
 	@Path("gameByPlayerId/{playerId}")
 	@Produces(MediaType.TEXT_PLAIN)
@@ -82,7 +112,14 @@ public class GameEndpoint {
 //	}
 	
 	
-	@GET
+	/**
+ * Send letter and return game.
+ *
+ * @param playerId the player id
+ * @param letter the letter
+ * @return the response
+ */
+@GET
 	@Path("sendLetter/{playerId}/{letter}")
 	@Produces(MediaType.TEXT_PLAIN)
 	public Response sendLetterAndReturnGame(@PathParam("playerId") long playerId, @PathParam("letter") String letter) {
@@ -95,6 +132,13 @@ public class GameEndpoint {
 							;
 	}	
 	
+	/**
+	 * Sets the word and return game.
+	 *
+	 * @param playerId the player id
+	 * @param word the word
+	 * @return the response
+	 */
 	@GET
 	@Path("updateWord/{playerId}/{word}")
 	@Produces(MediaType.TEXT_PLAIN)
@@ -108,6 +152,12 @@ public class GameEndpoint {
 							;
 	}	
 	
+	/**
+	 * To json.
+	 *
+	 * @param o the o
+	 * @return the string
+	 */
 	private String toJson(Object o) {
 		return gson.toJson(o);
 	}

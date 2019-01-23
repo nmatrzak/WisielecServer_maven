@@ -10,13 +10,27 @@ import java.util.Queue;
 import java.util.Random;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class WordGenerator.
+ */
 public class WordGenerator {
 
+	/** The Constant WORDS_FILE_NAME. */
 	private final static String WORDS_FILE_NAME = "words.txt";
+	
+	/** The words. */
 	private List<String> words = new ArrayList<String>();
+	
+	/** The used words. */
 	private Queue<String> usedWords = new ConcurrentLinkedQueue<String>();
+	
+	/** The rand. */
 	private Random rand = new Random(System.currentTimeMillis());
 
+	/**
+	 * Instantiates a new word generator.
+	 */
 	public WordGenerator() {
 		System.out.println("WordGenerator: reading and collecting words from file " + WORDS_FILE_NAME + "!");
 		URL url = this.getClass().getClassLoader().getResource(WORDS_FILE_NAME);
@@ -39,6 +53,11 @@ public class WordGenerator {
 		}
 	}
 
+	/**
+	 * Gets the new word.
+	 *
+	 * @return the new word
+	 */
 	public String getNewWord() {
 		if (usedWords.size() == words.size()) {
 			usedWords.clear();

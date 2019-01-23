@@ -1,3 +1,4 @@
+
 package tests;
 
 import static org.junit.Assert.assertTrue;
@@ -10,8 +11,15 @@ import game.Game;
 import game.Player;
 
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class GameTests.
+ */
 public class GameTests {
 	
+	/**
+	 * Games get continous ids.
+	 */
 	@Test
 	public void gamesGetContinousIds() {
 		Game game1  = new Game();
@@ -21,6 +29,9 @@ public class GameTests {
 		assertTrue(game2.getGameId() == game1.getGameId()+1);
 	}
 	
+	/**
+	 * Game acvtivity has change.
+	 */
 	@Test 
 	public void gameAcvtivityHasChange() {
 		Game game  = new Game();
@@ -34,6 +45,9 @@ public class GameTests {
 		assertTrue(game.getLastActivity().isAfter(lastActivity));
 	}
 	
+	/**
+	 * Game has word and guess players.
+	 */
 	@Test 
 	public void gameHasWordAndGuessPlayers() {
 		Player player1 = new Player("Piotr");
